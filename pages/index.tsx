@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -11,7 +10,6 @@ const Container = styled.div`
   height: 100vh;
   min-height: 100vh;
   padding: 0 0.5rem;
-  background-color: green;
 `
 
 const Main = styled.main`
@@ -21,6 +19,39 @@ const Main = styled.main`
   align-items: center;
   justify-content: center;
   padding: 5rem 0;
+`
+
+const Title = styled.h1`
+  margin: 0;
+  font-size: 4rem;
+  line-height: 1.15;
+  text-align: center;
+
+  a {
+    color: #0070f3;
+    text-decoration: none;
+  }
+
+  a:hover,
+  a:focus,
+  a:active {
+    text-decoration: underline;
+  }
+`
+
+const Description = styled.p`
+  font-size: 1.5rem;
+  line-height: 1.5;
+  text-align: center;
+`
+
+const Code = styled.code`
+  padding: 0.75rem;
+  font-family: Menlo, 'Monaco, Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono',
+    'Bitstream Vera Sans Mono', 'Courier New', monospace;
+  font-size: 1.1rem;
+  background: #fafafa;
+  border-radius: 5px;
 `
 
 const Grid = styled.div`
@@ -36,136 +67,111 @@ const Grid = styled.div`
     width: 100%;
   }
 `
-const Block = styled.div`
-  width: 100px;
-  height: 100px;
-  border: 1px solid white;
-`
 
-const Stone = styled.div<{ val: number }>`
-  height: 60px;
+const Card = styled.a`
+  width: 45%;
+  padding: 1.5rem;
   margin: 1rem;
-  background-color: ${(props) => (props.val === 1 ? 'white' : 'black')};
-  border-radius: 50%;
+  color: inherit;
+  text-align: left;
+  text-decoration: none;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  transition: color 0.15s ease, border-color 0.15s ease;
+
+  :hover,
+  :focus,
+  :active {
+    color: #0070f3;
+    border-color: #0070f3;
+  }
+
+  h2 {
+    margin: 0 0 1rem;
+    font-size: 1.5rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
 `
 
-type Cell = { row: number; col: number }
-const Home: NextPage = () => {
-  // prettier-ignore
-  const [board, setBoard] = useState([
-    [0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0],
-    [0,0,0,1,2,0,0,0],
-    [0,0,0,2,1,0,0,0],
-    [0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0],
-    [0,0,0,0,0,0,0,0]
-  ])
-  const { whiteCount, blackCount } = useMemo(() => {
-    let blCo = 0 // 黒の石の数
-    let whCo = 0 // 白の石の数
-    for (let x = 0; x < 8; x++) {
-      for (let y = 0; y < 8; y++) {
-        if (board[x][y] === 1) {
-          whCo += 1
-        }
-        if (board[x][y] === 2) {
-          blCo += 1
-        }
-      }
-    }
-    return { whiteCount: whCo, blackCount: blCo }
-  }, [board])
-  useEffect(() => {
-    console.log(whiteCount + blackCount)
-    if (whiteCount + blackCount === 64) {
-      if (whiteCount > blackCount) {
-        alert('白の勝ちです。')
-      } else {
-        alert('黒の勝ちです。')
-      }
-    }
-  }, [whiteCount, blackCount])
-  const [turnColor, setTurnColor] = useState(1)
-  // const boardCommit = (newBoard: number[][], reverseColor: number) => {
-  //   return new Promise((resolve, reject) => {
-  //     setBoard(newBoard) // boardに変更を反映
-  //     setTurnColor(reverseColor)
-  //     resolve(reverseColor)
-  //   })
-  // }
-  const onClick = (x: number, y: number) => {
-    const newBoard: number[][] = JSON.parse(JSON.stringify(board)) // boardを直接書き換えないようにコピー作成
-    const reverseColor: number = turnColor === 1 ? 2 : 1
-    // prettier-ignore
-    const directions: number[][] = [
-      [-1, 0], [-1, 1], [0, 1], [1, 1], [1, 0], [1, -1], [0, -1], [-1, -1]
-    ]
-    const candidates: Cell[] = []
-    for (const direction of directions) {
-      for (let n = 1; n < 8; n++) {
-        const newX = x + direction[0] * n
-        const newY = y + direction[1] * n
-        if (newX < 0 || newY < 0 || newX > 7 || newY > 7) break
-        if (newBoard[newX][newY] === reverseColor) {
-          candidates.push({ row: newX, col: newY })
-        } else if (newBoard[newX][newY] === turnColor) {
-          candidates.push({ row: newX, col: newY })
-          break
-        } else {
-          break
-        }
-      }
-      if (candidates.length > 1) {
-        const lastCell = candidates[candidates.length - 1]
-        if (newBoard[lastCell.row][lastCell.col] === turnColor) {
-          candidates.splice(candidates.length - 1, 0)
-          for (const cell of candidates) {
-            newBoard[cell.row][cell.col] = turnColor
-          }
-          newBoard[x][y] = turnColor
-        }
-      }
-      candidates.splice(0, candidates.length)
-    }
-    if (newBoard[x][y] === turnColor) {
-      setBoard(newBoard) // boardに変更を反映
-      setTurnColor(reverseColor)
-      // homeがレンダリングされた後に判定する必要がある
-      // boardCommit(newBoard, reverseColor).then(() => {
-      // console.log(whiteCount + blackCount)
-      // if (whiteCount + blackCount === 64) {
-      //   if (whiteCount > blackCount) {
-      //     alert('白の勝ちです。')
-      //   } else {
-      //     alert('黒の勝ちです。')
-      //   }
-      // }
-      // })
-    }
+const Footer = styled.footer`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px;
+  border-top: 1px solid #eaeaea;
+
+  a {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
   }
+`
+
+const Logo = styled.span`
+  height: 1em;
+  margin-left: 0.5rem;
+`
+
+const Home: NextPage = () => {
   return (
     <Container>
       <Head>
         <title>Create Next App</title>
         <meta name="description" content="Generated by create next app" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="favicon.ico" />
       </Head>
 
       <Main>
-        <h1>{turnColor === 1 ? '白の番です。' : '黒の番です。'}</h1>
+        <Title>
+          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        </Title>
+
+        <Description>
+          Get started by editing <Code>pages/index.js</Code>
+        </Description>
+
         <Grid>
-          {board.map((row, x) =>
-            row.map((color, y) => (
-              <Block key={`${x}-${y}`} onClick={() => onClick(x, y)}>
-                {x}, {y}
-                {color > 0 && <Stone val={color} />}
-              </Block>
-            ))
-          )}
+          <Card href="https://nextjs.org/docs">
+            <h2>Documentation &rarr;</h2>
+            <p>Find in-depth information about Next.js features and API.</p>
+          </Card>
+
+          <Card href="https://nextjs.org/learn">
+            <h2>Learn &rarr;</h2>
+            <p>Learn about Next.js in an interactive course with quizzes!</p>
+          </Card>
+
+          <Card href="https://github.com/vercel/next.js/tree/master/examples">
+            <h2>Examples &rarr;</h2>
+            <p>Discover and deploy boilerplate example Next.js projects.</p>
+          </Card>
+
+          <Card href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app">
+            <h2>Deploy &rarr;</h2>
+            <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
+          </Card>
         </Grid>
       </Main>
+
+      <Footer>
+        <a
+          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Powered by{' '}
+          <Logo>
+            <img src="vercel.svg" alt="Vercel Logo" width={72} height={16} />
+          </Logo>
+        </a>
+      </Footer>
     </Container>
   )
 }
