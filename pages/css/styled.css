@@ -1,0 +1,23 @@
+@page {
+  size: a4 portrait; /* 横の場合はlandscope */
+  margin: 0; /* chromeの印刷用ヘッダーとフッターを排除 */
+}
+
+/* 各要素の余白リセット */
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 200mm; /* 用紙の横幅を改めて指定 chrome用 */
+}
+
+.page {
+  box-sizing: border-box;
+  width: 200mm; /* 用紙の横幅を改めて指定 */
+  height: 295mm; /* 高さには0.5mm余裕を持たせる */
+  page-break-after: always; /* 改ページを行う */
+  padding: 20 25;
+  font-size: 11pt;
+}
