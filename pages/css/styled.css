@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @page {
   size: a4 portrait; /* 横の場合はlandscope */
   margin: 0; /* chromeの印刷用ヘッダーとフッターを排除 */
@@ -20,4 +21,71 @@ body {
   page-break-after: always; /* 改ページを行う */
   padding: 20 25;
   font-size: 11pt;
+}
+
+.txt__right {
+  text-align: right;
+}
+
+.txt__center {
+  text-align: center;
+}
+
+.txt_underline {
+  text-decoration: underline;
+}
+
+.name {
+  font-size: 12pt;
+}
+
+.caption {
+  font-size: 9pt;
+}
+
+.bank {
+  margin-bottom: 1em;
+}
+
+h1 {
+  margin: 1em 0;
+  font-size: 16pt;
+  letter-spacing: 0.2em;
+}
+
+.price {
+  display: flex;
+  max-width: 60%;
+  margin: 1em 0 2em;
+  font-size: 14pt;
+  border: solid 0.5pt #000;
+}
+
+.price dt,
+.price dd {
+  padding: 1em;
+}
+
+.price dt {
+  border-right: solid 0.5pt #000;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.1em;
+  border: solid 0.5pt #000;
+}
+
+thead,
+tfoot th {
+  background: #ccc;
+}
+
+tfoot td:empty {
+  border: none;
 }
