@@ -169,13 +169,8 @@ const Home: NextPage = () => {
               </Link>
             </li>
             <li>
-              <Link href="/list/print_a4">
+              <Link href="/list/printa4">
                 <a target="_blank">A4 print</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/hello_world">
-                <a target="_blank">hello world</a>
               </Link>
             </li>
           </ul>
