@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -119,8 +118,8 @@ const Logo = styled.span`
   height: 1em;
   margin-left: 0.5rem;
 `
-const onClick = () => {
-  const url = 'pages/list/printa4.html'
+const onClick = (path: string) => {
+  const url = '/list/' + path
   window.open(url)
 }
 
@@ -162,25 +161,13 @@ const Home: NextPage = () => {
             <h2>Deploy &rarr;</h2>
             <p>Instantly deploy your Next.js site to a public URL with Vercel.</p>
           </Card>
-          <ul>
-            <li>
-              <Link href="/">
-                <a>home</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/list/print_a4">
-                <a target="_blank">A4 print</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/hello_world">
-                <a target="_blank">hello world</a>
-              </Link>
-            </li>
-          </ul>
-          <Card onClick={() => onClick()}>
-            <h2>A4 print &rarr;</h2>
+
+          <Card onClick={() => onClick('print_a4')}>
+            <h2>A4 sample print&rarr;</h2>
+          </Card>
+
+          <Card onClick={() => onClick('print_targetlist')}>
+            <h2>targetlist print &rarr;</h2>
           </Card>
         </Grid>
       </Main>
