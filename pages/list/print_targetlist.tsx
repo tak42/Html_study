@@ -110,6 +110,7 @@ const TargetlistData = styled.div`
   table {
     border-spacing: 0;
     border: solid 1px #000;
+    box-sizing: border-box;
   }
   tr {
     :last-child {
@@ -125,8 +126,13 @@ const TargetlistData = styled.div`
     font-size: 20px;
     width: 200px;
     text-align: center;
+    margin: 0;
+    padding: 0.5rem;
     :last-child {
       border-right: 0;
+    }
+    :nth-child(1) {
+      width: 30px;
     }
   }
 `
@@ -196,6 +202,17 @@ const Home: NextPage = () => {
               <tbody>
                 <tr>
                   <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
+                  <td>□</td>
+                  <td>□</td>
+                  <td>□</td>
+                </tr>
+                <tr>
+                  <td>2</td>
                   <td>1</td>
                   <td>1</td>
                   <td>1</td>
@@ -206,18 +223,7 @@ const Home: NextPage = () => {
                   <td>□</td>
                 </tr>
                 <tr>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>□</td>
-                  <td>□</td>
-                  <td>□</td>
-                </tr>
-                <tr>
-                  <td>1</td>
+                  <td>3</td>
                   <td>1</td>
                   <td>1</td>
                   <td>1</td>
@@ -228,18 +234,7 @@ const Home: NextPage = () => {
                   <td>□</td>
                 </tr>
                 <tr>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>□</td>
-                  <td>□</td>
-                  <td>□</td>
-                </tr>
-                <tr>
-                  <td>1</td>
+                  <td>4</td>
                   <td>1</td>
                   <td>1</td>
                   <td>1</td>
@@ -250,18 +245,7 @@ const Home: NextPage = () => {
                   <td>□</td>
                 </tr>
                 <tr>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>□</td>
-                  <td>□</td>
-                  <td>□</td>
-                </tr>
-                <tr>
-                  <td>1</td>
+                  <td>5</td>
                   <td>1</td>
                   <td>1</td>
                   <td>1</td>
@@ -272,18 +256,7 @@ const Home: NextPage = () => {
                   <td>□</td>
                 </tr>
                 <tr>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>□</td>
-                  <td>□</td>
-                  <td>□</td>
-                </tr>
-                <tr>
-                  <td>1</td>
+                  <td>6</td>
                   <td>1</td>
                   <td>1</td>
                   <td>1</td>
@@ -294,7 +267,40 @@ const Home: NextPage = () => {
                   <td>□</td>
                 </tr>
                 <tr>
+                  <td>7</td>
                   <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>□</td>
+                  <td>□</td>
+                  <td>□</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>□</td>
+                  <td>□</td>
+                  <td>□</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>□</td>
+                  <td>□</td>
+                  <td>□</td>
+                </tr>
+                <tr>
+                  <td>10</td>
                   <td>1</td>
                   <td>1</td>
                   <td>1</td>
