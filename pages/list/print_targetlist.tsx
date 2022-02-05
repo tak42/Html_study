@@ -14,8 +14,8 @@ const Printcontents = styled.html`
   }
 
   body {
-    width: 1500px;
-    background: #eee;
+    width: 1700px;
+    background: white;
     -webkit-print-color-adjust: exact;
     color-adjust: exact;
     line-height: 1.5em;
@@ -23,14 +23,14 @@ const Printcontents = styled.html`
   /* プレビュー用のスタイル */
   @media screen {
     body {
-      background: #eee;
+      background: white;
     }
   }
 `
 
 const Sectionpage = styled.section`
-  width: 1500px; /* 用紙の横幅を改めて指定 */
-  height: 1000px; /* 高さには0.5mm余裕を持たせる */
+  width: 1700px; /* 用紙の横幅を改めて指定 */
+  height: 1100px; /* 高さには0.5mm余裕を持たせる */
   box-sizing: border-box;
   page-break-after: always; /* 改ページを行う */
   padding: 30px 40px;
@@ -38,19 +38,28 @@ const Sectionpage = styled.section`
 
   /* プレビュー用のスタイル */
   @media screen {
+    size: a4 landscope;
     background: white; /* 背景を白く */
     box-shadow: 0 0.5mm 2mm rgba(0, 0, 0, 0.3); /* ドロップシャドウ */
     margin: 5mm;
   }
-
+  p {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
   td {
-    width: 500px;
+    width: 550px;
   }
 `
 
 const Organization = styled.span`
   width: 100px;
   height: 50px;
+  p {
+    font-size: 25px;
+    text-align: left;
+  }
 `
 
 const RemoteDest = styled.span`
@@ -80,6 +89,7 @@ const RemoteDest = styled.span`
 
 const TargetlistID = styled.span`
   table {
+    text-align: right;
     border-spacing: 0;
     border: solid 1px #000;
   }
@@ -104,8 +114,8 @@ const TargetlistID = styled.span`
 `
 
 const TargetlistData = styled.div`
-  width: 1400px;
-  height: 900px;
+  width: 1700px;
+  height: 1000px;
   margin-top: 16px;
   table {
     border-spacing: 0;
@@ -124,7 +134,8 @@ const TargetlistData = styled.div`
     border-bottom: 1px solid #000;
     border-right: 1px solid #000;
     font-size: 20px;
-    width: 200px;
+    /* width: 200px; */
+    height: 80px;
     text-align: center;
     margin: 0;
     padding: 0.5rem;
@@ -133,6 +144,30 @@ const TargetlistData = styled.div`
     }
     :nth-child(1) {
       width: 30px;
+    }
+    :nth-child(2) {
+      width: 100px;
+    }
+    :nth-child(3) {
+      width: 150px;
+    }
+    :nth-child(4) {
+      width: 475px;
+    }
+    :nth-child(5) {
+      width: 80px;
+    }
+    :nth-child(6) {
+      width: 475px;
+    }
+    :nth-child(7) {
+      width: 80px;
+    }
+    :nth-child(8) {
+      width: 100px;
+    }
+    :nth-child(9) {
+      width: 80px;
     }
   }
 `
@@ -146,6 +181,7 @@ const Home: NextPage = () => {
       </head>
       <body>
         <Sectionpage>
+          <p>対象者一覧表</p>
           <table>
             <tr>
               <td>
@@ -213,99 +249,99 @@ const Home: NextPage = () => {
                 </tr>
                 <tr>
                   <td>2</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
                 </tr>
                 <tr>
                   <td>3</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
                 </tr>
                 <tr>
                   <td>4</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
                 </tr>
                 <tr>
                   <td>5</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
                 </tr>
                 <tr>
                   <td>6</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
                 </tr>
                 <tr>
                   <td>7</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
                 </tr>
                 <tr>
                   <td>8</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
                 </tr>
                 <tr>
                   <td>9</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
                 </tr>
                 <tr>
                   <td>10</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
-                  <td>1</td>
+                  <td></td>
+                  <td>富士 三郎</td>
+                  <td>東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２</td>
+                  <td>19991111</td>
+                  <td>9000000003_009999_0000000323_131240.pdf</td>
                   <td>□</td>
                   <td>□</td>
                   <td>□</td>
