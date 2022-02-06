@@ -15,15 +15,15 @@ const Printcontents = styled.html`
 
   body {
     width: 1700px;
-    background: white;
     -webkit-print-color-adjust: exact;
     color-adjust: exact;
     line-height: 1.5em;
+    counter-reset: sheet;
   }
   /* プレビュー用のスタイル */
   @media screen {
     body {
-      background: white;
+      background: #eee;
     }
   }
 `
@@ -35,6 +35,13 @@ const Sectionpage = styled.section`
   page-break-after: always; /* 改ページを行う */
   padding: 30px 40px;
   font-size: 20pt;
+  ::after {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    counter-increment: sheet;
+    content: counter(sheet) 'ページ ';
+  }
 
   /* プレビュー用のスタイル */
   @media screen {
@@ -52,20 +59,43 @@ const Sectionpage = styled.section`
     width: 550px;
   }
 `
+const Header = styled.div`
+  margin-bottom: 1rem;
+  td {
+    :nth-child(1) {
+      width: 700px;
+    }
+    :nth-child(2) {
+      width: 500px;
+    }
+    :nth-child(3) {
+      padding-left: 50px;
+    }
+  }
+`
 
 const Organization = styled.span`
-  width: 100px;
-  height: 50px;
-  p {
+  table {
     font-size: 25px;
     text-align: left;
+  }
+  td {
+    padding-bottom: 1rem;
+    :nth-child(1) {
+      width: 150px;
+    }
+    :nth-child(2) {
+      width: 500px;
+    }
   }
 `
 
 const RemoteDest = styled.span`
   table {
     border-spacing: 0;
-    border: solid 1px #000;
+    border-top: solid 1px #000;
+    border-left: solid 1px #000;
+    border-bottom: solid 1px #000;
   }
   tr {
     :last-child {
@@ -76,13 +106,21 @@ const RemoteDest = styled.span`
   }
   th,
   td {
+    height: 60px;
     border-bottom: 1px solid #000;
     border-right: 1px solid #000;
     font-size: 20px;
     width: 200px;
     text-align: center;
     :last-child {
-      border-right: 0;
+      /* border-right: 0; */
+      border-bottom: 0;
+    }
+    :nth-child(1) {
+      width: 300px;
+    }
+    :nth-child(2) {
+      width: 120px;
     }
   }
 `
@@ -91,7 +129,9 @@ const TargetlistID = styled.span`
   table {
     text-align: right;
     border-spacing: 0;
-    border: solid 1px #000;
+    border-top: solid 1px #000;
+    border-left: solid 1px #000;
+    border-bottom: solid 1px #000;
   }
   tr {
     :last-child {
@@ -102,20 +142,31 @@ const TargetlistID = styled.span`
   }
   th,
   td {
+    height: 60px;
     border-bottom: 1px solid #000;
     border-right: 1px solid #000;
-    font-size: 20px;
+    font-size: 18px;
     width: 200px;
     text-align: center;
     :last-child {
-      border-right: 0;
+      /* border-right: 0; */
+      border-bottom: 0;
     }
+    :nth-child(1) {
+      width: 300px;
+    }
+    :nth-child(2) {
+      width: 120px;
+    }
+  }
+  .title {
+    font-size: 20px;
   }
 `
 
 const TargetlistData = styled.div`
   width: 1700px;
-  height: 1000px;
+  height: 900px;
   margin-top: 16px;
   table {
     border-spacing: 0;
@@ -182,44 +233,62 @@ const Home: NextPage = () => {
       <body>
         <Sectionpage>
           <p>対象者一覧表</p>
-          <table>
-            <tr>
-              <td>
-                <Organization>
-                  <p>自治体名： 東京都富士区(131240)</p>
-                  <p>事業者名： TEST株式会社(009999)</p>
-                </Organization>
-              </td>
-              <td>
-                <RemoteDest>
-                  <table>
-                    <tr>
-                      <td>リモートアクセス先</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>255.255.255.192</td>
-                      <td rowSpan={2}>QR</td>
-                    </tr>
-                  </table>
-                </RemoteDest>
-              </td>
-              <td>
-                <TargetlistID>
-                  <table>
-                    <tr>
-                      <td>対象者一覧ID</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>10-131240-009999-0000000001</td>
-                      <td rowSpan={2}>QR</td>
-                    </tr>
-                  </table>
-                </TargetlistID>
-              </td>
-            </tr>
-          </table>
+          <Header>
+            <table>
+              <tr>
+                <td>
+                  <Organization>
+                    <table>
+                      <tr>
+                        <td>
+                          <h4>自治体名：</h4>
+                        </td>
+                        <td>
+                          <h4>東京都富士区(131240)</h4>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h4>事業者名：</h4>
+                        </td>
+                        <td>
+                          <h4>TEST株式会社(009999)</h4>
+                        </td>
+                      </tr>
+                    </table>
+                  </Organization>
+                </td>
+                <td>
+                  <RemoteDest>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <th>リモートアクセス先</th>
+                          <td rowSpan={2}>QR</td>
+                        </tr>
+                        <tr>
+                          <th>255.255.255.192</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </RemoteDest>
+                </td>
+                <td>
+                  <TargetlistID>
+                    <table>
+                      <tr>
+                        <th className="title">対象者一覧ID</th>
+                        <td rowSpan={2}>QR</td>
+                      </tr>
+                      <tr>
+                        <th>10-131240-009999-0000000001</th>
+                      </tr>
+                    </table>
+                  </TargetlistID>
+                </td>
+              </tr>
+            </table>
+          </Header>
           <TargetlistData>
             <table>
               <thead>
