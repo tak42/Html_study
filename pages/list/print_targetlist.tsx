@@ -185,7 +185,6 @@ const TargetlistData = styled.div`
     border-bottom: 1px solid #000;
     border-right: 1px solid #000;
     font-size: 20px;
-    /* width: 200px; */
     height: 80px;
     text-align: center;
     margin: 0;
