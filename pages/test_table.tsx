@@ -223,42 +223,40 @@ const TargetlistData = styled.div`
 `
 
 const Table = () => {
-  const tbody = [];
-  for(let i = 0; i < 5; i++){
-      tbody.push(
-          <tr key={i}>
-              <td>{i}行目</td>
-              <td>眠い眠い</td>
-          </tr>
-      );
+  const tbody = []
+  for (let i = 0; i < 5; i++) {
+    tbody.push(
+      <tr key={i}>
+        <td>{i}行目</td>
+        <td>眠い眠い</td>
+      </tr>
+    )
   }
 
-return (
-  <table>
-    <thead>
-      <tr>
-        <th>行数</th>
-        <th>状態</th>
+  return (
+    <table>
+      <thead>
+        <tr>
+          <th>行数</th>
+          <th>状態</th>
+        </tr>
+      </thead>
+      <tbody>{tbody}</tbody>
+    </table>
+  )
+}
+const TableList = () => {
+  const tbodyList = []
+  for (let i = 0; i < 5; i++) {
+    tbodyList.push(
+      <tr key={i}>
+        <td>{i}行目</td>
+        <td>眠い眠い</td>
       </tr>
-    </thead>
-    <tbody>
-      {tbody}
-    </tbody>
-  </table>
-)
+    )
+  }
 }
 const Home: NextPage = () => {
-  const Table = () => {
-    const tbody = [];
-    for(let i = 0; i < 5; i++){
-        tbody.push(
-            <tr key={i}>
-                <td>{i}行目</td>
-                <td>眠い眠い</td>
-            </tr>
-        );
-    }
-  
   return (
     <html>
       <head>
@@ -273,9 +271,7 @@ const Home: NextPage = () => {
             <th>状態</th>
           </tr>
         </thead>
-        <tbody>
-          {tbody}
-        </tbody>
+        <tbody>{TableList}</tbody>
       </table>
     </html>
   )
