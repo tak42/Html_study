@@ -4,7 +4,8 @@ import styled from 'styled-components'
 const Home: NextPage = () => {
   const data = [
     { No: 1, Value: 'Hello' },
-    { No: 2, Value: 'World' }
+    { No: 2, Value: 'World' },
+    { No: 3, Value: '□' },
   ]
   return (
     <html>
