@@ -169,6 +169,10 @@ const Home: NextPage = () => {
           <Card onClick={() => onClick('print_targetlist')}>
             <h2>targetlist print &rarr;</h2>
           </Card>
+
+          <Card onClick={() => onClick('test_table')}>
+            <h2>table view test &rarr;</h2>
+          </Card>
         </Grid>
       </Main>
 
