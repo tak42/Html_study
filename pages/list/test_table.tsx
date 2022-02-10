@@ -1,5 +1,4 @@
 import type { NextPage } from 'next'
-import styled from 'styled-components'
 
 const Home: NextPage = () => {
   const data = [
@@ -7,12 +6,22 @@ const Home: NextPage = () => {
     { No: 2, Value: 'World' },
     { No: 3, Value: '□' },
   ]
+  const tdList = []
+  for (const item of data) {
+    tdList.push(
+      <tr>
+        <td>{item.No}</td>
+        <td>{item.Value}</td>
+      </tr>
+    )
+  }
+
   return (
     <html>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>対象者一覧表</title>
+        <title>Tableの動的表示テスト</title>
       </head>
       <table>
         <thead>
@@ -22,11 +31,13 @@ const Home: NextPage = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            data.map(elm => {
-              return <tr><td>{elm.No}</td><td>{elm.Value}</td></tr>
-            })
-          }
+          {data.map((elm, idx) => {
+            ;<tr key={`${idx}`}>
+              <td>{elm.No}</td>
+              <td>{elm.Value}</td>
+            </tr>
+          })}
+          {tdList}
         </tbody>
       </table>
     </html>
