@@ -90,42 +90,7 @@ const Organization = styled.span`
   }
 `
 
-const RemoteDest = styled.span`
-  table {
-    border-spacing: 0;
-    border-top: solid 1px #000;
-    border-left: solid 1px #000;
-    border-bottom: solid 1px #000;
-  }
-  tr {
-    :last-child {
-      td {
-        border-bottom: 0;
-      }
-    }
-  }
-  th,
-  td {
-    height: 60px;
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
-    font-size: 20px;
-    width: 200px;
-    text-align: center;
-    :last-child {
-      /* border-right: 0; */
-      border-bottom: 0;
-    }
-    :nth-child(1) {
-      width: 300px;
-    }
-    :nth-child(2) {
-      width: 120px;
-    }
-  }
-`
-
-const TargetlistID = styled.span`
+const RemoteAndTid = styled.span`
   table {
     text-align: right;
     border-spacing: 0;
@@ -227,33 +192,68 @@ const Home: NextPage = () => {
   const tId = '10-131240-009999-0000000001'
   // prettier-ignore
   const printDt = [
-    { No: 1, Cnt: '', Nm: '富士太郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 2, Cnt: '', Nm: '富士次郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 3, Cnt: '', Nm: '富士三郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 4, Cnt: '', Nm: '富士四郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 5, Cnt: '', Nm: '富士五郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 6, Cnt: '', Nm: '富士六郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 7, Cnt: '', Nm: '富士七郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 8, Cnt: '', Nm: '富士八郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 9, Cnt: '', Nm: '富士九郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' },
-    { No: 10, Cnt: '', Nm: '富士十郎', address: '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', BirthD: '19900101', FlNm: '9000000003_009999_0000000323_131240.pdf', Mk1: '□', Mk2: '□', Mk3: '□' }
+    { 'No': 1, 'Cnt': '', 'Nm': '富士太郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 2, 'Cnt': '', 'Nm': '富士次郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 3, 'Cnt': '', 'Nm': '富士三郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 4, 'Cnt': '', 'Nm': '富士四郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 5, 'Cnt': '', 'Nm': '富士五郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 6, 'Cnt': '', 'Nm': '富士六郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 7, 'Cnt': '', 'Nm': '富士七郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 8, 'Cnt': '', 'Nm': '富士八郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 9, 'Cnt': '', 'Nm': '富士九郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 10, 'Cnt': '', 'Nm': '富士十郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 11, 'Cnt': '', 'Nm': '富士十郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 12, 'Cnt': '', 'Nm': '富士十郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' },
+    { 'No': 13, 'Cnt': '', 'Nm': '富士十郎', 'adress': '東京都富士区東町９４４－２ 富士ハイツポートアイランド２０２', 'BirthD': '19900101', 'FlNm': '9000000003_009999_0000000323_131240.pdf', 'Mk1': '□', 'Mk2': '□', 'Mk3': '□' }
   ]
-  const tListDisplay = []
-  for (const elm of printDt) {
-    tListDisplay.push(
-      <tr>
-        <td>{elm.No}</td>
-        <td>{elm.Cnt}</td>
-        <td>{elm.Nm}</td>
-        <td>{elm.address}</td>
-        <td>{elm.BirthD}</td>
-        <td>{elm.FlNm}</td>
-        <td>{elm.Mk1}</td>
-        <td>{elm.Mk2}</td>
-        <td>{elm.Mk3}</td>
-      </tr>
+  // prettier-ignore
+  const thList = ['No', '出力回数', '氏名', '住所', '生年月日', 'ファイル名', '不見当', '差戻廃棄', '交付']
+
+  const header = []
+  // prettier-ignore
+  const Org = ['自治体名：,' + jDt.name + '(' + jDt.code + ')', '事業者名：,' + cDt.name + '(' + cDt.code + ')']
+  header.push(
+    <td>
+      <Organization>
+        <table>
+          {Org.map((elm, idx) => (
+            <tr key={idx}>
+              {elm.split(',').map((x, idx) => (
+                <td key={idx}>
+                  <h4>{x}</h4>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </table>
+      </Organization>
+    </td>
+  )
+  // prettier-ignore
+  const RemoteAndtId = [
+    {title: 'リモートアクセス先', qr: 'QR', value: '255.255.255.192'},
+    {title: '対象者一覧ID', qr: 'QR', value: tId}
+  ]
+  for (const elm of RemoteAndtId) {
+    header.push(
+      <td>
+        <RemoteAndTid>
+          <table>
+            <tbody>
+              <tr>
+                <th className="title">{elm.title}</th>
+                <td rowSpan={2}>{elm.qr}</td>
+              </tr>
+              <tr>
+                <th>{elm.value}</th>
+              </tr>
+            </tbody>
+          </table>
+        </RemoteAndTid>
+      </td>
     )
   }
+
   return (
     <Printcontents lang="ja">
       <head>
@@ -266,76 +266,31 @@ const Home: NextPage = () => {
           <p>対象者一覧表</p>
           <Header>
             <table>
-              <tr>
-                <td>
-                  <Organization>
-                    <table>
-                      <tr>
-                        <td>
-                          <h4>自治体名：</h4>
-                        </td>
-                        <td>
-                          <h4>東京都富士区(131240)</h4>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <h4>事業者名：</h4>
-                        </td>
-                        <td>
-                          <h4>TEST株式会社(009999)</h4>
-                        </td>
-                      </tr>
-                    </table>
-                  </Organization>
-                </td>
-                <td>
-                  <RemoteDest>
-                    <table>
-                      <tbody>
-                        <tr>
-                          <th>リモートアクセス先</th>
-                          <td rowSpan={2}>QR</td>
-                        </tr>
-                        <tr>
-                          <th>255.255.255.192</th>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </RemoteDest>
-                </td>
-                <td>
-                  <TargetlistID>
-                    <table>
-                      <tr>
-                        <th className="title">対象者一覧ID</th>
-                        <td rowSpan={2}>QR</td>
-                      </tr>
-                      <tr>
-                        <th>10-131240-009999-0000000001</th>
-                      </tr>
-                    </table>
-                  </TargetlistID>
-                </td>
-              </tr>
+              <tr>{header}</tr>
             </table>
           </Header>
           <TargetlistData>
             <table>
               <thead>
-                <tr>
-                  <th>No</th>
-                  <th>出力回数</th>
-                  <th>氏名</th>
-                  <th>住所</th>
-                  <th>生年月日</th>
-                  <th>ファイル名</th>
-                  <th>不見当</th>
-                  <th>差戻廃棄</th>
-                  <th>交付</th>
-                </tr>
+                {
+                  <tr>
+                    {thList.map((elm, idx) => (
+                      <th key={idx}>{elm}</th>
+                    ))}
+                  </tr>
+                }
               </thead>
-              <tbody>{tListDisplay}</tbody>
+              <tbody>
+                {printDt.map((elm, idx) => {
+                  return (
+                    <tr key={idx}>
+                      {Object.keys(elm).map((x, idx) => {
+                        return <td key={idx}>{elm[x as keyof typeof elm]}</td>
+                      })}
+                    </tr>
+                  )
+                })}
+              </tbody>
             </table>
           </TargetlistData>
         </Sectionpage>
