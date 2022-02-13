@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import { useMemo } from 'react'
 import styled from 'styled-components'
 
 const Printcontents = styled.html`
@@ -187,6 +188,7 @@ const TargetlistData = styled.div`
   }
 `
 const Home: NextPage = () => {
+  const rowCnt = 10
   const jDt = { name: '東京都富士区', code: '131240' }
   const cDt = { name: 'TEST株式会社', code: '009999' }
   const tId = '10-131240-009999-0000000001'
@@ -254,6 +256,56 @@ const Home: NextPage = () => {
     )
   }
 
+  const SectionCnt: number = useMemo(() => {
+    let cnt = 0
+    let dtLen = printDt.length
+    for (let i = 0; dtLen > 0; i++) {
+      dtLen = dtLen - rowCnt
+      cnt += 1
+    }
+    return cnt
+  }, [printDt])
+
+  // [[1page],[2page]]という構想、表示にはmap
+  // const tListSection: [][] = useMemo(() => {}, [printDt])
+
+  const SectionList = []
+  for (let i = 0; i < SectionCnt; i++) {
+    SectionList.push(
+      <Sectionpage>
+        <p>対象者一覧表</p>
+        <Header>
+          <table>
+            <tr>{header}</tr>
+          </table>
+        </Header>
+        <TargetlistData>
+          <table>
+            <thead>
+              {
+                <tr>
+                  {thList.map((elm, idx) => (
+                    <th key={idx}>{elm}</th>
+                  ))}
+                </tr>
+              }
+            </thead>
+            <tbody>
+              {printDt.map((elm, idx) => {
+                return (
+                  <tr key={idx}>
+                    {Object.keys(elm).map((x, idx) => {
+                      return <td key={idx}>{elm[x as keyof typeof elm]}</td>
+                    })}
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </TargetlistData>
+      </Sectionpage>
+    )
+  }
   return (
     <Printcontents lang="ja">
       <head>
@@ -261,40 +313,7 @@ const Home: NextPage = () => {
         <meta name="viewport" content="width=device-width" />
         <title>対象者一覧表</title>
       </head>
-      <body>
-        <Sectionpage>
-          <p>対象者一覧表</p>
-          <Header>
-            <table>
-              <tr>{header}</tr>
-            </table>
-          </Header>
-          <TargetlistData>
-            <table>
-              <thead>
-                {
-                  <tr>
-                    {thList.map((elm, idx) => (
-                      <th key={idx}>{elm}</th>
-                    ))}
-                  </tr>
-                }
-              </thead>
-              <tbody>
-                {printDt.map((elm, idx) => {
-                  return (
-                    <tr key={idx}>
-                      {Object.keys(elm).map((x, idx) => {
-                        return <td key={idx}>{elm[x as keyof typeof elm]}</td>
-                      })}
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </TargetlistData>
-        </Sectionpage>
-      </body>
+      <body>{SectionList}</body>
     </Printcontents>
   )
 }
