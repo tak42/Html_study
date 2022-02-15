@@ -36,13 +36,6 @@ const Sectionpage = styled.section`
   page-break-after: always; /* 改ページを行う */
   padding: 30px 40px;
   font-size: 20pt;
-  ::after {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    counter-increment: sheet;
-    content: counter(sheet) 'ページ ';
-  }
 
   /* プレビュー用のスタイル */
   @media screen {
@@ -58,6 +51,10 @@ const Sectionpage = styled.section`
   }
   td {
     width: 550px;
+  }
+  .page {
+    text-align: right;
+    margin-top: 1rem;
   }
 `
 const Header = styled.div`
@@ -211,54 +208,18 @@ const Home: NextPage = () => {
   // prettier-ignore
   const thList = ['No', '出力回数', '氏名', '住所', '生年月日', 'ファイル名', '不見当', '差戻廃棄', '交付']
 
-  const header = []
   // prettier-ignore
   const Org = ['自治体名：,' + jDt.name + '(' + jDt.code + ')', '事業者名：,' + cDt.name + '(' + cDt.code + ')']
-  header.push(
-    <td>
-      <Organization>
-        <table>
-          {Org.map((elm, idx) => (
-            <tr key={idx}>
-              {elm.split(',').map((x, idx) => (
-                <td key={idx}>
-                  <h4>{x}</h4>
-                </td>
-              ))}
-            </tr>
-          ))}
-        </table>
-      </Organization>
-    </td>
-  )
-  // prettier-ignore
   const RemoteAndtId = [
-    {title: 'リモートアクセス先', qr: 'QR', value: '255.255.255.192'},
-    {title: '対象者一覧ID', qr: 'QR', value: tId}
+    { title: 'リモートアクセス先', qr: 'QR', value: '255.255.255.192' },
+    { title: '対象者一覧ID', qr: 'QR', value: tId },
   ]
-  for (const elm of RemoteAndtId) {
-    header.push(
-      <td>
-        <RemoteAndTid>
-          <table>
-            <tbody>
-              <tr>
-                <th className="title">{elm.title}</th>
-                <td rowSpan={2}>{elm.qr}</td>
-              </tr>
-              <tr>
-                <th>{elm.value}</th>
-              </tr>
-            </tbody>
-          </table>
-        </RemoteAndTid>
-      </td>
-    )
-  }
+
   type D<T extends Record<never, never>> = T
+
   // prettier-ignore
   type listDt = D<{ No: number, Cnt: string, Nm: string, address: string, BirthD: string, FlNm: string, Mk1: string, Mk2: string, Mk3: string }[][]>
-  // { No: number, Cnt: string, Nm: string, address: string, BirthD: string, FlNm: string, Mk1: string, Mk2: string, Mk3: string }[][]
+
   const SectionCnt: number = useMemo(() => {
     let cnt = 0
     let dtLen = data.length
@@ -268,6 +229,7 @@ const Home: NextPage = () => {
     }
     return cnt
   }, [data])
+
   const printList: listDt = useMemo(() => {
     const rtnList: listDt = [
       [{ No: 1, Cnt: '', Nm: '', address: '', BirthD: '', FlNm: '', Mk1: '', Mk2: '', Mk3: '' }],
@@ -277,17 +239,47 @@ const Home: NextPage = () => {
     }
     return rtnList
   }, [data])
-  // [[1page],[2page]]という構想、表示にはmap
-  // const tListSection: [][] = useMemo(() => {}, [data])
 
-  const SectionList = []
-  for (const list of printList) {
-    SectionList.push(
-      <Sectionpage>
+  const SectionList = printList.map((list, idx) => {
+    return (
+      <Sectionpage key={idx}>
         <p>対象者一覧表</p>
         <Header>
           <table>
-            <tr>{header}</tr>
+            <tr>
+              <td>
+                <Organization>
+                  <table>
+                    {Org.map((elm, idx) => (
+                      <tr key={idx}>
+                        {elm.split(',').map((x, idx) => (
+                          <td key={idx}>
+                            <h4>{x}</h4>
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </table>
+                </Organization>
+              </td>
+              {RemoteAndtId.map((elm, idx) => (
+                <td key={idx}>
+                  <RemoteAndTid>
+                    <table>
+                      <tbody>
+                        <tr>
+                          <th className="title">{elm.title}</th>
+                          <td rowSpan={2}>{elm.qr}</td>
+                        </tr>
+                        <tr>
+                          <th>{elm.value}</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </RemoteAndTid>
+                </td>
+              ))}
+            </tr>
           </table>
         </Header>
         <TargetlistData>
@@ -314,9 +306,12 @@ const Home: NextPage = () => {
             </tbody>
           </table>
         </TargetlistData>
+        <div className="page">
+          <label>{idx + 1}ページ</label>
+        </div>
       </Sectionpage>
     )
-  }
+  })
   return (
     <Printcontents lang="ja">
       <head>
