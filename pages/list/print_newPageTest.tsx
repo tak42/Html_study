@@ -31,7 +31,7 @@ const Printcontents = styled.html`
 
 const Sectionpage = styled.section`
   width: 1700px; /* 用紙の横幅を改めて指定 */
-  height: 1100px; /* 高さには0.5mm余裕を持たせる */
+  height: 1150px; /* 高さには0.5mm余裕を持たせる */
   box-sizing: border-box;
   page-break-after: always; /* 改ページを行う */
   padding: 30px 40px;
