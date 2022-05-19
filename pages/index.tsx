@@ -119,7 +119,7 @@ const Logo = styled.span`
   margin-left: 0.5rem;
 `
 const onClick = (path: string) => {
-  const url = '/list/' + path
+  const url = './list/' + path
   window.open(url)
 }
 
